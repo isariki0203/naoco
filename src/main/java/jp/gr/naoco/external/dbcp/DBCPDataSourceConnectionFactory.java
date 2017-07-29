@@ -56,151 +56,151 @@ import jp.gr.naoco.core.connection.ConnectionFactory;
  * @author naoco0917
  */
 public class DBCPDataSourceConnectionFactory implements ConnectionFactory {
-	private static final List<ConfigrationToPropertiesKey> CONF2PROP_KEY_LIST = new ArrayList<ConfigrationToPropertiesKey>();
-	static {
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultAutoCommit"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultReadOnly"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultTransactionIsolation"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultCatalog"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("cacheState"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("driver", "driverClassName"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("lifo"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxTotal", "maxTotal", "100"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxIdle", "maxIdle", "100"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("minIdle"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("initialSize", "initialSize", "5"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxWaitMillis", "maxWaitMillis", "3000"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnCreate"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnBorrow"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnReturn"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("timeBetweenEvictionRunsMillis"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("numTestsPerEvictionRun"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("minEvictableIdleTimeMillis"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("softMinEvictableIdleTimeMillis"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("evictionPolicyClassName"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testWhileIdle"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("password"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("url"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("user", "username"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("validationQuery"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("validationQueryTimeout"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("jmxName"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("connectionInitSqls"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("accessToUnderlyingConnectionAllowed"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedOnBorrow"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedOnMaintenance"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedTimeout"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("logAbandoned"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("poolPreparedStatements"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxOpenPreparedStatements"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("connectionProperties"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxConnLifetimeMillis"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("rollbackOnReturn"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("enableAutoCommitOnReturn"));
-		CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultQueryTimeout"));
-		Configuration.addDBConfigToPropertiesList(DBCPDataSourceConnectionFactory.class.getName(), CONF2PROP_KEY_LIST);
-	}
+    private static final List<ConfigrationToPropertiesKey> CONF2PROP_KEY_LIST = new ArrayList<ConfigrationToPropertiesKey>();
+    static {
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultAutoCommit"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultReadOnly"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultTransactionIsolation"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultCatalog"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("cacheState"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("driver", "driverClassName"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("lifo"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxTotal", "maxTotal", "100"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxIdle", "maxIdle", "100"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("minIdle"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("initialSize", "initialSize", "5"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxWaitMillis", "maxWaitMillis", "3000"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnCreate"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnBorrow"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testOnReturn"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("timeBetweenEvictionRunsMillis"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("numTestsPerEvictionRun"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("minEvictableIdleTimeMillis"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("softMinEvictableIdleTimeMillis"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("evictionPolicyClassName"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("testWhileIdle"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("password"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("url"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("user", "username"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("validationQuery"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("validationQueryTimeout"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("jmxName"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("connectionInitSqls"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("accessToUnderlyingConnectionAllowed"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedOnBorrow"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedOnMaintenance"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("removeAbandonedTimeout"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("logAbandoned"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("poolPreparedStatements"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxOpenPreparedStatements"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("connectionProperties"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("maxConnLifetimeMillis"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("rollbackOnReturn"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("enableAutoCommitOnReturn"));
+        CONF2PROP_KEY_LIST.add(new ConfigrationToPropertiesKey("defaultQueryTimeout"));
+        Configuration.addDBConfigToPropertiesList(DBCPDataSourceConnectionFactory.class.getName(), CONF2PROP_KEY_LIST);
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public DBCPDataSourceConnectionFactory() {
-		// nothing to do
-	}
+    public DBCPDataSourceConnectionFactory() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@Override
-	public Connection create(String lookupName) throws SQLException, NamingException {
-		try {
-			BasicDataSource ds = DataSourceFactory.create(lookupName);
-			return ds.getConnection();
-		} catch (SQLException e) {
-			throw e;
-		} catch (NamingException e) {
-			throw e;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @Override
+    public Connection create(String lookupName) throws SQLException, NamingException {
+        try {
+            BasicDataSource ds = DataSourceFactory.create(lookupName);
+            return ds.getConnection();
+        } catch (SQLException e) {
+            throw e;
+        } catch (NamingException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public static void clear() {
-		DataSourceFactory.factoryMap_.clear();
-	}
+    public static void clear() {
+        DataSourceFactory.factoryMap_.clear();
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Inner classes
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Inner classes
 
-	private static abstract class DataSourceFactory {
-		protected BasicDataSource datasource_ = null;
+    private static abstract class DataSourceFactory {
+        protected BasicDataSource datasource_ = null;
 
-		protected static final ConcurrentHashMap<String, DataSourceFactory> factoryMap_ = new ConcurrentHashMap<String, DataSourceFactory>();
+        protected static final ConcurrentHashMap<String, DataSourceFactory> factoryMap_ = new ConcurrentHashMap<String, DataSourceFactory>();
 
-		public static BasicDataSource create(String lookupName) throws NamingException {
-			DataSourceFactory factory = factoryMap_.get(lookupName);
-			if (null == factory) {
-				synchronized (factoryMap_) {
-					factory = factoryMap_.get(lookupName);
-					if (null == factory) {
-						factoryMap_.put(lookupName, new ConcretizedFactory());
-						factory = factoryMap_.get(lookupName);
-					}
-				}
-			}
-			factory._init(lookupName);
-			return factory.getDataSource();
-		}
+        public static BasicDataSource create(String lookupName) throws NamingException {
+            DataSourceFactory factory = factoryMap_.get(lookupName);
+            if (null == factory) {
+                synchronized (factoryMap_) {
+                    factory = factoryMap_.get(lookupName);
+                    if (null == factory) {
+                        factoryMap_.put(lookupName, new ConcretizedFactory());
+                        factory = factoryMap_.get(lookupName);
+                    }
+                }
+            }
+            factory._init(lookupName);
+            return factory.getDataSource();
+        }
 
-		private BasicDataSource getDataSource() {
-			return datasource_;
-		}
+        private BasicDataSource getDataSource() {
+            return datasource_;
+        }
 
-		public abstract void _init(String lookupName) throws NamingException;
-	}
+        public abstract void _init(String lookupName) throws NamingException;
+    }
 
-	private static class ConcretizedFactory extends DataSourceFactory {
-		@Override
-		public void _init(String lookupName) throws NamingException {
-			synchronized (this) {
-				if (null != datasource_) {
-					return;
-				}
-				DBConfiguration conf = Configuration.getDbConfig(lookupName);
-				Properties properties = conf.getProperties(DBCPDataSourceConnectionFactory.class.getName());
-				try {
-					datasource_ = BasicDataSourceFactory.createDataSource(properties);
-				} catch (NamingException e) {
-					throw e;
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-				Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if ((null != datasource_) && (!datasource_.isClosed())) {
-								datasource_.close();
-							}
-						} catch (Throwable t) {
-							t.printStackTrace(System.err);
-						}
-					}
-				}));
-				factoryMap_.put(lookupName, new NoActionFactory(datasource_));
-			}
-		}
-	}
+    private static class ConcretizedFactory extends DataSourceFactory {
+        @Override
+        public void _init(String lookupName) throws NamingException {
+            synchronized (this) {
+                if (null != datasource_) {
+                    return;
+                }
+                DBConfiguration conf = Configuration.getDbConfig(lookupName);
+                Properties properties = conf.getProperties(DBCPDataSourceConnectionFactory.class.getName());
+                try {
+                    datasource_ = BasicDataSourceFactory.createDataSource(properties);
+                } catch (NamingException e) {
+                    throw e;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if ((null != datasource_) && (!datasource_.isClosed())) {
+                                datasource_.close();
+                            }
+                        } catch (Throwable t) {
+                            t.printStackTrace(System.err);
+                        }
+                    }
+                }));
+                factoryMap_.put(lookupName, new NoActionFactory(datasource_));
+            }
+        }
+    }
 
-	private static class NoActionFactory extends DataSourceFactory {
+    private static class NoActionFactory extends DataSourceFactory {
 
-		public NoActionFactory(BasicDataSource datasource) {
-			datasource_ = datasource;
-		}
+        public NoActionFactory(BasicDataSource datasource) {
+            datasource_ = datasource;
+        }
 
-		@Override
-		public void _init(String lookupName) throws NamingException {
-			// nothing to do
-		}
-	}
+        @Override
+        public void _init(String lookupName) throws NamingException {
+            // nothing to do
+        }
+    }
 }

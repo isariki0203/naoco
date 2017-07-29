@@ -4,61 +4,59 @@ import jp.gr.naoco.core.factory.SingletoneInstanceFactory;
 
 public class Factory {
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	private Factory() {
-		// nothing to do
-	}
+    private Factory() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	public static ConsumerInterface consumer(
-			final Class<? extends ConsumerInterface> instanceClass) {
-		SingletoneInstanceFactory<ConsumerInterface> factory = new SingletoneInstanceFactory<ConsumerInterface>() {
-			@Override
-			protected Class<?> getInstanceClass() {
-				return instanceClass;
-			}
+    public static ConsumerInterface consumer(final Class<? extends ConsumerInterface> instanceClass) {
+        SingletoneInstanceFactory<ConsumerInterface> factory = new SingletoneInstanceFactory<ConsumerInterface>() {
+            @Override
+            protected Class<?> getInstanceClass() {
+                return instanceClass;
+            }
 
-			@Override
-			protected Class<ConsumerInterface> getInterfaceClass() {
-				return ConsumerInterface.class;
-			}
-		};
-		return factory.getInsatnce();
-	}
+            @Override
+            protected Class<ConsumerInterface> getInterfaceClass() {
+                return ConsumerInterface.class;
+            }
+        };
+        return factory.getInsatnce();
+    }
 
-	public static Producer producer(
-			final Class<? extends Producer> instanceClass) {
-		SingletoneInstanceFactory<Producer> factory = new SingletoneInstanceFactory<Producer>() {
-			@Override
-			protected Class<?> getInstanceClass() {
-				return instanceClass;
-			}
+    public static Producer producer(final Class<? extends Producer> instanceClass) {
+        SingletoneInstanceFactory<Producer> factory = new SingletoneInstanceFactory<Producer>() {
+            @Override
+            protected Class<?> getInstanceClass() {
+                return instanceClass;
+            }
 
-			@Override
-			protected Class<Producer> getInterfaceClass() {
-				return Producer.class;
-			}
-		};
-		return factory.getInsatnce();
-	}
+            @Override
+            protected Class<Producer> getInterfaceClass() {
+                return Producer.class;
+            }
+        };
+        return factory.getInsatnce();
+    }
 
-	public static ConsumerProducerInterface consumerProducer(
-			final Class<? extends ConsumerProducerInterface> instanceClass) {
-		SingletoneInstanceFactory<ConsumerProducerInterface> factory = new SingletoneInstanceFactory<ConsumerProducerInterface>() {
-			@Override
-			protected Class<?> getInstanceClass() {
-				return instanceClass;
-			}
+    public static ConsumerProducerInterface consumerProducer(
+            final Class<? extends ConsumerProducerInterface> instanceClass) {
+        SingletoneInstanceFactory<ConsumerProducerInterface> factory = new SingletoneInstanceFactory<ConsumerProducerInterface>() {
+            @Override
+            protected Class<?> getInstanceClass() {
+                return instanceClass;
+            }
 
-			@Override
-			protected Class<ConsumerProducerInterface> getInterfaceClass() {
-				return ConsumerProducerInterface.class;
-			}
-		};
-		return factory.getInsatnce();
-	}
+            @Override
+            protected Class<ConsumerProducerInterface> getInterfaceClass() {
+                return ConsumerProducerInterface.class;
+            }
+        };
+        return factory.getInsatnce();
+    }
 }

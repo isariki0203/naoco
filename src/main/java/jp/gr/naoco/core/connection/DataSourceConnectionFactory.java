@@ -12,20 +12,20 @@ import javax.sql.DataSource;
  * JDDIデータソースを利用してDBコネクションを取得する
  */
 public class DataSourceConnectionFactory implements ConnectionFactory {
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public DataSourceConnectionFactory() {
-		// nothing to do
-	}
+    public DataSourceConnectionFactory() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@Override
-	public Connection create(String lookupName) throws SQLException, NamingException {
-		Context ctx = new InitialContext();
-		DataSource ds = (DataSource) ctx.lookup(lookupName);
-		return ds.getConnection();
-	}
+    @Override
+    public Connection create(String lookupName) throws SQLException, NamingException {
+        Context ctx = new InitialContext();
+        DataSource ds = (DataSource) ctx.lookup(lookupName);
+        return ds.getConnection();
+    }
 }

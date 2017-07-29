@@ -1,7 +1,7 @@
 package jp.gr.naoco.chain;
 
 public interface JoinedProducer extends Producer {
-	public void join();
+    public void join();
 
-	public void reserveInterrupt(Throwable t);
+    public void reserveInterrupt(Throwable t);
 }

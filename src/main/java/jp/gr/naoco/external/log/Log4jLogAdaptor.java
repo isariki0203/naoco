@@ -24,94 +24,94 @@ import jp.gr.naoco.core.log.LogAdaptor;
  */
 public class Log4jLogAdaptor implements LogAdaptor {
 
-	private Logger logger_;
+    private Logger logger_;
 
-	private String name_;
+    private String name_;
 
-	private boolean requiredDebug_ = false;
+    private boolean requiredDebug_ = false;
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public Log4jLogAdaptor() {
-		// nothing to do
-	}
+    public Log4jLogAdaptor() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@Override
-	public void fatal(String message) {
-		logger_.log(name_, Level.FATAL, message, null);
-	}
+    @Override
+    public void fatal(String message) {
+        logger_.log(name_, Level.FATAL, message, null);
+    }
 
-	@Override
-	public void fatal(String message, Throwable t) {
-		logger_.log(name_, Level.FATAL, message, t);
-	}
+    @Override
+    public void fatal(String message, Throwable t) {
+        logger_.log(name_, Level.FATAL, message, t);
+    }
 
-	@Override
-	public void error(String message) {
-		logger_.log(name_, Level.ERROR, message, null);
-	}
+    @Override
+    public void error(String message) {
+        logger_.log(name_, Level.ERROR, message, null);
+    }
 
-	@Override
-	public void error(String message, Throwable t) {
-		logger_.log(name_, Level.ERROR, message, t);
-	}
+    @Override
+    public void error(String message, Throwable t) {
+        logger_.log(name_, Level.ERROR, message, t);
+    }
 
-	@Override
-	public void warn(String message) {
-		logger_.log(name_, Level.WARN, message, null);
-	}
+    @Override
+    public void warn(String message) {
+        logger_.log(name_, Level.WARN, message, null);
+    }
 
-	@Override
-	public void warn(String message, Throwable t) {
-		logger_.log(name_, Level.WARN, message, t);
-	}
+    @Override
+    public void warn(String message, Throwable t) {
+        logger_.log(name_, Level.WARN, message, t);
+    }
 
-	@Override
-	public void info(String message) {
-		logger_.log(name_, Level.INFO, message, null);
-	}
+    @Override
+    public void info(String message) {
+        logger_.log(name_, Level.INFO, message, null);
+    }
 
-	@Override
-	public void info(String message, Throwable t) {
-		logger_.log(name_, Level.INFO, message, t);
-	}
+    @Override
+    public void info(String message, Throwable t) {
+        logger_.log(name_, Level.INFO, message, t);
+    }
 
-	@Override
-	public void debug(String message) {
-		logger_.log(name_, Level.DEBUG, message, null);
-	}
+    @Override
+    public void debug(String message) {
+        logger_.log(name_, Level.DEBUG, message, null);
+    }
 
-	@Override
-	public void debug(String message, Throwable t) {
-		logger_.log(name_, Level.DEBUG, message, t);
-	}
+    @Override
+    public void debug(String message, Throwable t) {
+        logger_.log(name_, Level.DEBUG, message, t);
+    }
 
-	@Override
-	public void sql(String message) {
-		logger_.log(name_, Level.DEBUG, message, null);
-	}
+    @Override
+    public void sql(String message) {
+        logger_.log(name_, Level.DEBUG, message, null);
+    }
 
-	@Override
-	public void trace(String message) {
-		logger_.log(name_, Level.TRACE, message, null);
-	}
+    @Override
+    public void trace(String message) {
+        logger_.log(name_, Level.TRACE, message, null);
+    }
 
-	@Override
-	public void initialize(String name) {
-		logger_ = Logger.getLogger(name);
-		name_ = name;
-		if ((null != logger_.getEffectiveLevel()) && (Level.DEBUG_INT == logger_.getEffectiveLevel().toInt())) {
-			requiredDebug_ = true;
-		}
-	}
+    @Override
+    public void initialize(String name) {
+        logger_ = Logger.getLogger(name);
+        name_ = name;
+        if ((null != logger_.getEffectiveLevel()) && (Level.DEBUG_INT == logger_.getEffectiveLevel().toInt())) {
+            requiredDebug_ = true;
+        }
+    }
 
-	@Override
-	public boolean requiredDebugLevel() {
-		return requiredDebug_;
-	}
+    @Override
+    public boolean requiredDebugLevel() {
+        return requiredDebug_;
+    }
 
 }

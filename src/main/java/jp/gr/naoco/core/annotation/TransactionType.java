@@ -16,5 +16,5 @@ package jp.gr.naoco.core.annotation;
  * @author naoco0917
  */
 public enum TransactionType {
-	TAKEOVER, NEW
+    TAKEOVER, NEW
 }

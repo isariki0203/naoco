@@ -6,9 +6,9 @@ import jp.gr.naoco.chain.Container;
 
 public interface ProducerQueue {
 
-	public void offer(Container obj);
+    public void offer(Container obj);
 
-	public void finish();
+    public void finish();
 
-	Iterator<Container> consumerIterator();
+    Iterator<Container> consumerIterator();
 }

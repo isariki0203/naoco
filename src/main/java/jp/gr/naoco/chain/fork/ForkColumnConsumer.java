@@ -9,46 +9,46 @@ import jp.gr.naoco.core.log.LaolLogger;
 
 public class ForkColumnConsumer extends Consumer {
 
-	private List<ForkLegProducer> legProducerList_;
+    private List<ForkLegProducer> legProducerList_;
 
-	// ////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // ////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	protected ForkColumnConsumer(List<ForkLegChain> legChainList) {
-		legProducerList_ = new ArrayList<ForkLegProducer>(legChainList.size());
-		for (ForkLegChain legChain : legChainList) {
-			legProducerList_.add(legChain.getForkLegConsumerProducer());
-		}
-	}
+    protected ForkColumnConsumer(List<ForkLegChain> legChainList) {
+        legProducerList_ = new ArrayList<ForkLegProducer>(legChainList.size());
+        for (ForkLegChain legChain : legChainList) {
+            legProducerList_.add(legChain.getForkLegConsumerProducer());
+        }
+    }
 
-	// ////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // ////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@Override
-	public void execute_(Container container) {
-		for (ForkLegProducer producer : legProducerList_) {
-			producer.connect(container);
-		}
-	}
+    @Override
+    public void execute_(Container container) {
+        for (ForkLegProducer producer : legProducerList_) {
+            producer.connect(container);
+        }
+    }
 
-	@Override
-	public void finalize() {
-		Throwable t = null;
-		for (ForkLegProducer producer : legProducerList_) {
-			try {
-				producer.finish();
-				LOG.debug("finish to " + producer.getThread().getName());
-			} catch (Throwable e) {
-				t = e;
-			}
-		}
-		if (null != t) {
-			throw new RuntimeException(t);
-		}
-	}
+    @Override
+    public void finalize() {
+        Throwable t = null;
+        for (ForkLegProducer producer : legProducerList_) {
+            try {
+                producer.finish();
+                LOG.debug("finish to " + producer.getThread().getName());
+            } catch (Throwable e) {
+                t = e;
+            }
+        }
+        if (null != t) {
+            throw new RuntimeException(t);
+        }
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Logger
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logger
 
-	private static final LaolLogger LOG = new LaolLogger(ForkColumnConsumer.class.getName());
+    private static final LaolLogger LOG = new LaolLogger(ForkColumnConsumer.class.getName());
 }

@@ -34,7 +34,6 @@ import jp.gr.naoco.external.inject.LogicInjectorBridge;
  * \@Inject
  * private SampleLogic logic_;
  * </pre>
- * 
  * </p>
  * <p>
  * <h3>前提条件</h3> インジェクション対象となるインターフェースのAbstractInstanceFactoryインスタンスは、 ObjectFactoryが呼び出される前に生成されているか、
@@ -52,42 +51,42 @@ import jp.gr.naoco.external.inject.LogicInjectorBridge;
  */
 public class StrutsActionInjectObjectFactory extends ObjectFactory {
 
-	private static final long serialVersionUID = 2566445872315617569L;
+    private static final long serialVersionUID = 2566445872315617569L;
 
-	private static final Map<String, List<Class<?>>> CALLED_CLASS_NAME_MAP = new ConcurrentHashMap<String, List<Class<?>>>();
+    private static final Map<String, List<Class<?>>> CALLED_CLASS_NAME_MAP = new ConcurrentHashMap<String, List<Class<?>>>();
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public StrutsActionInjectObjectFactory() {
-		// nothing to do
-	}
+    public StrutsActionInjectObjectFactory() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public Object buildBean(Class clazz, Map<String, Object> extraContext) throws Exception {
-		try {
-			// Struts（xwork2)のActionSupport派生クラスのみInjection対象
-			if (!ActionSupport.class.isAssignableFrom(clazz)) {
-				// 通常通りクラスからインスタンスを生成して返却
-				return super.buildBean(clazz, extraContext);
-			}
+    @SuppressWarnings("unchecked")
+    @Override
+    public Object buildBean(Class clazz, Map<String, Object> extraContext) throws Exception {
+        try {
+            // Struts（xwork2)のActionSupport派生クラスのみInjection対象
+            if (!ActionSupport.class.isAssignableFrom(clazz)) {
+                // 通常通りクラスからインスタンスを生成して返却
+                return super.buildBean(clazz, extraContext);
+            }
 
-			LogicInjectorBridge injector = LogicInjectorBridge.FACTORY.getInsatnce();
+            LogicInjectorBridge injector = LogicInjectorBridge.FACTORY.getInsatnce();
 
-			// インスタンスをInjector経由で生成して返却
-			return injector.newInstance(clazz);
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
-		}
-		return null;
-	}
+            // インスタンスをInjector経由で生成して返却
+            return injector.newInstance(clazz);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+        }
+        return null;
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Logger
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logger
 
-	private static final Logger LOG = Logger.getLogger(StrutsActionInjectObjectFactory.class);
+    private static final Logger LOG = Logger.getLogger(StrutsActionInjectObjectFactory.class);
 }

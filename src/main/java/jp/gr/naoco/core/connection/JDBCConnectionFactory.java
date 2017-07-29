@@ -11,24 +11,24 @@ import jp.gr.naoco.core.conf.Configuration.DBConfiguration;
  * DriverManagerを利用してDBコネクションを取得する
  */
 public class JDBCConnectionFactory implements ConnectionFactory {
-	static {
-		Configuration.dbCloserHook();
-	}
+    static {
+        Configuration.dbCloserHook();
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public JDBCConnectionFactory() {
-		// nothing to do
-	}
+    public JDBCConnectionFactory() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@Override
-	public Connection create(String lookupName) throws SQLException, ClassNotFoundException {
-		DBConfiguration dbConfig = Configuration.getDbConfig(lookupName);
-		Class.forName(dbConfig.getDriver());
-		return DriverManager.getConnection(dbConfig.getUrl(), dbConfig.getUser(), dbConfig.getPassword());
-	}
+    @Override
+    public Connection create(String lookupName) throws SQLException, ClassNotFoundException {
+        DBConfiguration dbConfig = Configuration.getDbConfig(lookupName);
+        Class.forName(dbConfig.getDriver());
+        return DriverManager.getConnection(dbConfig.getUrl(), dbConfig.getUser(), dbConfig.getPassword());
+    }
 }

@@ -9,30 +9,30 @@ import org.apache.log4j.Logger;
 @Interceptor(name = "naoco.logic_intercept")
 public class LogicInjectionInterceptor {
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public LogicInjectionInterceptor() {
-		// nothing to do
-	}
+    public LogicInjectionInterceptor() {
+        // nothing to do
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	@BeforeStartTransaction
-	public void inject() {
-		InterceptorContext context = InterceptorContext.getInstance();
-		Object instance = context.getInvokeInstance();
-		try {
-			LogicInjectorBridge.FACTORY.getInsatnce().inject(instance);
-		} catch (Exception e) {
-			LOG.warn(e.getMessage(), e);
-		}
+    @BeforeStartTransaction
+    public void inject() {
+        InterceptorContext context = InterceptorContext.getInstance();
+        Object instance = context.getInvokeInstance();
+        try {
+            LogicInjectorBridge.FACTORY.getInsatnce().inject(instance);
+        } catch (Exception e) {
+            LOG.warn(e.getMessage(), e);
+        }
 
-	}
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Logger
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logger
 
-	private static final Logger LOG = Logger.getLogger(LogicInjectionInterceptor.class);
+    private static final Logger LOG = Logger.getLogger(LogicInjectionInterceptor.class);
 }

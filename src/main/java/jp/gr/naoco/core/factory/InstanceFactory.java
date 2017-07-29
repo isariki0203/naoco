@@ -20,7 +20,7 @@ import jp.gr.naoco.core.transaction.TransactionBarrierFactory;
  * @see {@link TransactionBarrierFactory}, {@link SingletonInstanceFactory}, {@link ThreadLocalInstanceFactory}
  */
 public interface InstanceFactory<T> {
-	public T getInsatnce();
+    public T getInsatnce();
 
-	public void setNeedsBarrier(boolean needsBarrier);
+    public void setNeedsBarrier(boolean needsBarrier);
 }

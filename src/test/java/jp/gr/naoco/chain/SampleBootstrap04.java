@@ -17,78 +17,78 @@ import jp.gr.naoco.core.NaocoCoreInitializer;
 import jp.gr.naoco.core.annotation.Transaction;
 
 public class SampleBootstrap04 {
-	public static void main(String[] args) throws Exception {
-		// naocoの初期化
-		NaocoCoreInitializer.initialize("conf.laol01", new OriginalLogAdaptor());
-		Producer producer = Factory.producer(SampleProducer.class);
-		ConsumerProducerInterface consumerProducer = Factory.consumerProducer(SampleConsumerProducer.class);
-		ConsumerInterface consumer = Factory.consumer(SampleConsumer.class);
+    public static void main(String[] args) throws Exception {
+        // naocoの初期化
+        NaocoCoreInitializer.initialize("conf.laol01", new OriginalLogAdaptor());
+        Producer producer = Factory.producer(SampleProducer.class);
+        ConsumerProducerInterface consumerProducer = Factory.consumerProducer(SampleConsumerProducer.class);
+        ConsumerInterface consumer = Factory.consumer(SampleConsumer.class);
 
-		Chain chain = new Chain(producer, 10) //
-				.parallel(consumerProducer) //
-				.parallel(consumer);
-		chain.execute();
-	}
+        Chain chain = new Chain(producer, 10) //
+                .parallel(consumerProducer) //
+                .parallel(consumer);
+        chain.execute();
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Inner classes
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Inner classes
 
-	@Transaction(lookupName = "java:comp/env/jdbc/test")
-	public static class SampleProducer implements Producer {
+    @Transaction(lookupName = "java:comp/env/jdbc/test")
+    public static class SampleProducer implements Producer {
 
-		@Override
-		public void execute(ProducerQueue queue) {
-			Random random = new Random();
-			for (int i = 0; i < 30; i++) {
-				String value = Long.toString(random.nextLong());
-				log.debug("producer[" + i + "]:" + value);
-				queue.offer(new Container(value));
-				try {
-					Thread.sleep((long) (random.nextDouble() * 100));
-				} catch (InterruptedException e) {
+        @Override
+        public void execute(ProducerQueue queue) {
+            Random random = new Random();
+            for (int i = 0; i < 30; i++) {
+                String value = Long.toString(random.nextLong());
+                log.debug("producer[" + i + "]:" + value);
+                queue.offer(new Container(value));
+                try {
+                    Thread.sleep((long) (random.nextDouble() * 100));
+                } catch (InterruptedException e) {
 
-				}
-			}
-		}
-	}
+                }
+            }
+        }
+    }
 
-	@Transaction(lookupName = "java:comp/env/jdbc/test")
-	public static class SampleConsumerProducer extends ConsumerProducer {
-		private int counter_ = 0;
-		private Random random = new Random();
+    @Transaction(lookupName = "java:comp/env/jdbc/test")
+    public static class SampleConsumerProducer extends ConsumerProducer {
+        private int counter_ = 0;
+        private Random random = new Random();
 
-		@Override
-		public void execute_(Container container, ProducerQueue queue) {
-			String value = (String) container.get();
-			log.debug("consumerProducer[" + counter_ + "]:" + value);
-			queue.offer(container);
-			counter_++;
-			try {
-				Thread.sleep((long) (random.nextDouble() * 10));
-			} catch (InterruptedException e) {
+        @Override
+        public void execute_(Container container, ProducerQueue queue) {
+            String value = (String) container.get();
+            log.debug("consumerProducer[" + counter_ + "]:" + value);
+            queue.offer(container);
+            counter_++;
+            try {
+                Thread.sleep((long) (random.nextDouble() * 10));
+            } catch (InterruptedException e) {
 
-			}
-		}
-	}
+            }
+        }
+    }
 
-	@Transaction(lookupName = "java:comp/env/jdbc/test")
-	public static class SampleConsumer extends Consumer {
-		private int counter_ = 0;
-		private Random random = new Random();
+    @Transaction(lookupName = "java:comp/env/jdbc/test")
+    public static class SampleConsumer extends Consumer {
+        private int counter_ = 0;
+        private Random random = new Random();
 
-		@Override
-		public void execute_(Container container) {
-			String value = (String) container.get();
-			log.debug("consumer[" + counter_ + "]:" + value);
-			counter_++;
-			try {
-				Thread.sleep((long) (random.nextDouble() * 130));
-			} catch (InterruptedException e) {
+        @Override
+        public void execute_(Container container) {
+            String value = (String) container.get();
+            log.debug("consumer[" + counter_ + "]:" + value);
+            counter_++;
+            try {
+                Thread.sleep((long) (random.nextDouble() * 130));
+            } catch (InterruptedException e) {
 
-			}
-		}
-	}
+            }
+        }
+    }
 
-	public static final Logger log = Logger.getRootLogger();
+    public static final Logger log = Logger.getRootLogger();
 
 }

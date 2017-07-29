@@ -21,116 +21,116 @@ import jp.gr.naoco.core.transaction.TransactionBarrierFactory;
  * @param <T>
  */
 public class ThreadLocalInstanceFactory<T> extends AbstractInstanceFactory implements InstanceFactory<T> {
-	private ThreadLocal<T> instance_ = new ThreadLocal<T>();
+    private ThreadLocal<T> instance_ = new ThreadLocal<T>();
 
-	private boolean needsBarrier_ = true;
+    private boolean needsBarrier_ = true;
 
-	private Class<T> interfaceClass_ = null;
+    private Class<T> interfaceClass_ = null;
 
-	private Class<?> instanceClass_ = null;
+    private Class<?> instanceClass_ = null;
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	protected ThreadLocalInstanceFactory() {
-		set(this);
-	}
+    protected ThreadLocalInstanceFactory() {
+        set(this);
+    }
 
-	/**
-	 * インターフェースに対する実装クラスの取得を、LaolCoreInitializerの初期設定、
-	 * あるいはConfigurationによる設定に依存する場合は、 本コンストラクタにてインターフェースクラスのみを指定。
-	 *
-	 * @param interfaceClass
-	 *            取得するインスタンスのインターフェースクラス。（実装クラスは設定に依存）
-	 */
-	public ThreadLocalInstanceFactory(Class<T> interfaceClass) {
-		interfaceClass_ = interfaceClass;
-		set(this);
-	}
+    /**
+     * インターフェースに対する実装クラスの取得を、LaolCoreInitializerの初期設定、
+     * あるいはConfigurationによる設定に依存する場合は、 本コンストラクタにてインターフェースクラスのみを指定。
+     *
+     * @param interfaceClass
+     *            取得するインスタンスのインターフェースクラス。（実装クラスは設定に依存）
+     */
+    public ThreadLocalInstanceFactory(Class<T> interfaceClass) {
+        interfaceClass_ = interfaceClass;
+        set(this);
+    }
 
-	/**
-	 * インターフェースに対するデフォルト実装クラスを指定する。
-	 * <p>
-	 * LaolCoreInitializerの初期設定、 あるいはConfigurationによる設定が存在する場合は、 本コンストラクタした実装クラスは無視し、設定側のクラスを取得する。
-	 * </p>
-	 *
-	 * @param interfaceClass
-	 *            取得するインスタンスのインターフェースクラス。
-	 * @param instanceClass
-	 *            取得するインスタンスのクラス（設定が存在する場合はそちらを優先）
-	 */
-	public ThreadLocalInstanceFactory(Class<T> interfaceClass, Class<?> instanceClass) {
-		interfaceClass_ = interfaceClass;
-		instanceClass_ = instanceClass;
-		set(this);
-	}
+    /**
+     * インターフェースに対するデフォルト実装クラスを指定する。
+     * <p>
+     * LaolCoreInitializerの初期設定、 あるいはConfigurationによる設定が存在する場合は、 本コンストラクタした実装クラスは無視し、設定側のクラスを取得する。
+     * </p>
+     *
+     * @param interfaceClass
+     *            取得するインスタンスのインターフェースクラス。
+     * @param instanceClass
+     *            取得するインスタンスのクラス（設定が存在する場合はそちらを優先）
+     */
+    public ThreadLocalInstanceFactory(Class<T> interfaceClass, Class<?> instanceClass) {
+        interfaceClass_ = interfaceClass;
+        instanceClass_ = instanceClass;
+        set(this);
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	/**
-	 * <p>
-	 * インスタンスを取得する。
-	 * </p>
-	 * <p>
-	 * 同一スレッド内で共有するインスタンスを取得する。
-	 * </p>
-	 * <p>
-	 * インスタンスは{@link getInterfaceClass}指定したインターフェース型で返却される。 インスタンスの元は {@link getInstanceClass}が返却するクラスのインスタンスであるが、
-	 * トランザクションの生成やインターセプターの呼出しのために、{@link TransactionBarriered}内部で {@link java.lang.reflect.Proxy}
-	 * により新たに生成したインスタンスを返却する。
-	 * </p>
-	 *
-	 * @return getInterfaceClassメソッドで指定した型のインスタンス（スレッド内で共有）
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public T getInsatnce() {
-		T instance = instance_.get();
-		if (null == instance) {
-			try {
-				Object configuredInstance = Configuration.createDIInstance(getInterfaceClass());
-				if (null == configuredInstance) {
-					instance = (T) getInstanceClass().newInstance();
-				} else {
-					instance = (T) configuredInstance;
-				}
-				if (needsBarrier_) {
-					instance = (T) TransactionBarrierFactory.createBarrier(getInterfaceClass(), instance);
-				}
-				instance_.set(instance);
+    /**
+     * <p>
+     * インスタンスを取得する。
+     * </p>
+     * <p>
+     * 同一スレッド内で共有するインスタンスを取得する。
+     * </p>
+     * <p>
+     * インスタンスは{@link getInterfaceClass}指定したインターフェース型で返却される。 インスタンスの元は {@link getInstanceClass}が返却するクラスのインスタンスであるが、
+     * トランザクションの生成やインターセプターの呼出しのために、{@link TransactionBarriered}内部で {@link java.lang.reflect.Proxy}
+     * により新たに生成したインスタンスを返却する。
+     * </p>
+     *
+     * @return getInterfaceClassメソッドで指定した型のインスタンス（スレッド内で共有）
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public T getInsatnce() {
+        T instance = instance_.get();
+        if (null == instance) {
+            try {
+                Object configuredInstance = Configuration.createDIInstance(getInterfaceClass());
+                if (null == configuredInstance) {
+                    instance = (T) getInstanceClass().newInstance();
+                } else {
+                    instance = (T) configuredInstance;
+                }
+                if (needsBarrier_) {
+                    instance = (T) TransactionBarrierFactory.createBarrier(getInterfaceClass(), instance);
+                }
+                instance_.set(instance);
 
-				LOG.debug("success create barriered instance :" + getInstanceClass().getName());
-			} catch (IllegalAccessException e) {
-				LOG.error(e.getMessage(), e);
-				throw new ReflectionException(e);
-			} catch (InstantiationException e) {
-				LOG.error(e.getMessage(), e);
-				throw new ReflectionException(e);
-			}
-		}
-		return instance;
-	}
+                LOG.debug("success create barriered instance :" + getInstanceClass().getName());
+            } catch (IllegalAccessException e) {
+                LOG.error(e.getMessage(), e);
+                throw new ReflectionException(e);
+            } catch (InstantiationException e) {
+                LOG.error(e.getMessage(), e);
+                throw new ReflectionException(e);
+            }
+        }
+        return instance;
+    }
 
-	@Override
-	public void setNeedsBarrier(boolean needsBarrier) {
-		needsBarrier_ = needsBarrier;
-	}
+    @Override
+    public void setNeedsBarrier(boolean needsBarrier) {
+        needsBarrier_ = needsBarrier;
+    }
 
-	@Override
-	protected void clearCache() {
-		instance_ = new ThreadLocal<T>();
-	}
+    @Override
+    protected void clearCache() {
+        instance_ = new ThreadLocal<T>();
+    }
 
-	protected Class<?> getInstanceClass() {
-		return instanceClass_;
-	}
+    protected Class<?> getInstanceClass() {
+        return instanceClass_;
+    }
 
-	protected Class<T> getInterfaceClass() {
-		return interfaceClass_;
-	}
+    protected Class<T> getInterfaceClass() {
+        return interfaceClass_;
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Logger
-	private static final LaolLogger LOG = new LaolLogger(ThreadLocalInstanceFactory.class.getName());
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logger
+    private static final LaolLogger LOG = new LaolLogger(ThreadLocalInstanceFactory.class.getName());
 }

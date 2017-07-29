@@ -6,10 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
-LaolCoreFacadeTest01.class, //
-		LaolCoreFacadeTest02.class, //
-		SingletoneInstanceFactoryTest01.class, //
-		ThreadLocalInstanceFactoryTest01.class //
+        LaolCoreFacadeTest01.class, //
+        LaolCoreFacadeTest02.class, //
+        SingletoneInstanceFactoryTest01.class, //
+        ThreadLocalInstanceFactoryTest01.class //
 })
 public class LaolCoreAllTests {
 

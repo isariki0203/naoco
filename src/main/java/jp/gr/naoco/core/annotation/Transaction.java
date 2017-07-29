@@ -24,7 +24,7 @@ import jp.gr.naoco.core.transaction.TransactionBarrierFactory;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Transaction {
-	public String lookupName();
+    public String lookupName();
 
-	public TransactionType type() default TransactionType.TAKEOVER;
+    public TransactionType type() default TransactionType.TAKEOVER;
 }

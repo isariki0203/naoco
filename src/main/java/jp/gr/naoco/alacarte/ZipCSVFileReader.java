@@ -75,108 +75,108 @@ import jp.gr.naoco.alacarte.ZipFileWriter.CSVConfig;
  */
 public class ZipCSVFileReader implements Closeable {
 
-	private InputStream in_ = null;
+    private InputStream in_ = null;
 
-	private BufferedInputStream buf_ = null;
+    private BufferedInputStream buf_ = null;
 
-	private ZipInputStream zip_ = null;
+    private ZipInputStream zip_ = null;
 
-	private InputStreamReader ir_ = null;
+    private InputStreamReader ir_ = null;
 
-	private CSVReader<?> reader_ = null;
+    private CSVReader<?> reader_ = null;
 
-	private CSVConfig csvConfig_ = null;
+    private CSVConfig csvConfig_ = null;
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Constructor
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Constructor
 
-	public ZipCSVFileReader(InputStream input, CSVConfig csvConfig) throws IOException {
-		in_ = input;
-		buf_ = new BufferedInputStream(in_);
-		zip_ = new ZipInputStream(buf_);
-		ir_ = new InputStreamReader(zip_);
-		csvConfig_ = csvConfig;
-	}
+    public ZipCSVFileReader(InputStream input, CSVConfig csvConfig) throws IOException {
+        in_ = input;
+        buf_ = new BufferedInputStream(in_);
+        zip_ = new ZipInputStream(buf_);
+        ir_ = new InputStreamReader(zip_);
+        csvConfig_ = csvConfig;
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Methods
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Methods
 
-	public ZipEntry nextZipEntry() throws IOException {
-		return zip_.getNextEntry();
-	}
+    public ZipEntry nextZipEntry() throws IOException {
+        return zip_.getNextEntry();
+    }
 
-	/**
-	 * 新しいZipEntryの読込を開始するときに一度呼出す。
-	 * 
-	 * @throws IOException
-	 * @throws CSVReadException
-	 */
-	public <T> void setNext() throws IOException, CSVReadException {
-		try {
-			reader_ = new CSVReader<T>(ir_, csvConfig_, true);
-		} catch (CSVReadException e) {
-			// nothing to do
-		}
-	}
+    /**
+     * 新しいZipEntryの読込を開始するときに一度呼出す。
+     * 
+     * @throws IOException
+     * @throws CSVReadException
+     */
+    public <T> void setNext() throws IOException, CSVReadException {
+        try {
+            reader_ = new CSVReader<T>(ir_, csvConfig_, true);
+        } catch (CSVReadException e) {
+            // nothing to do
+        }
+    }
 
-	/**
-	 * 新しいZipEntryの読込を開始するときに一度呼出す。
-	 * 
-	 * @param entityClass このZipエントリの値を設定するオブジェクトのクラス
-	 * @throws IOException CSV読込時のエラー
-	 * @throws CSVReadException CSVヘッダ行をCSV解釈している最中に発生するエラー
-	 */
-	public <T> void setNext(Class<T> entityClass) throws IOException, CSVReadException {
-		reader_ = new CSVReader<T>(ir_, csvConfig_, entityClass);
-	}
+    /**
+     * 新しいZipEntryの読込を開始するときに一度呼出す。
+     * 
+     * @param entityClass このZipエントリの値を設定するオブジェクトのクラス
+     * @throws IOException CSV読込時のエラー
+     * @throws CSVReadException CSVヘッダ行をCSV解釈している最中に発生するエラー
+     */
+    public <T> void setNext(Class<T> entityClass) throws IOException, CSVReadException {
+        reader_ = new CSVReader<T>(ir_, csvConfig_, entityClass);
+    }
 
-	public List<ErrorInfo> getErrorList() {
-		return reader_.getErrorList();
-	}
+    public List<ErrorInfo> getErrorList() {
+        return reader_.getErrorList();
+    }
 
-	public boolean hasErrorLines() {
-		return reader_.hasErrorLines();
-	}
+    public boolean hasErrorLines() {
+        return reader_.hasErrorLines();
+    }
 
-	public String[] readCSV() throws IOException {
-		String[] result = reader_.readLine();
-		return result;
-	}
+    public String[] readCSV() throws IOException {
+        String[] result = reader_.readLine();
+        return result;
+    }
 
-	public LinkedHashMap<String, String> readCSV2Map() throws IOException {
-		LinkedHashMap<String, String> result = reader_.readMap();
-		return result;
-	}
+    public LinkedHashMap<String, String> readCSV2Map() throws IOException {
+        LinkedHashMap<String, String> result = reader_.readMap();
+        return result;
+    }
 
-	public Object readCSV2Entity() throws IOException {
-		Object result = reader_.readEntity();
-		return result;
-	}
+    public Object readCSV2Entity() throws IOException {
+        Object result = reader_.readEntity();
+        return result;
+    }
 
-	@Override
-	public void close() throws IOException {
-		try {
-			if (null != reader_) {
-				reader_.close();
-			}
-			if (null != ir_) {
-				ir_.close();
-			}
-			if (null != zip_) {
-				zip_.close();
-			}
-			if (null != buf_) {
-				buf_.close();
-			}
-		} finally {
-			if (null != in_) {
-				in_.close();
-			}
-		}
-	}
+    @Override
+    public void close() throws IOException {
+        try {
+            if (null != reader_) {
+                reader_.close();
+            }
+            if (null != ir_) {
+                ir_.close();
+            }
+            if (null != zip_) {
+                zip_.close();
+            }
+            if (null != buf_) {
+                buf_.close();
+            }
+        } finally {
+            if (null != in_) {
+                in_.close();
+            }
+        }
+    }
 
-	// /////////////////////////////////////////////////////////////////////////////////////////////
-	// Logger
+    // /////////////////////////////////////////////////////////////////////////////////////////////
+    // Logger
 
-	private static Logger LOG = Logger.getLogger(ZipCSVFileReader.class);
+    private static Logger LOG = Logger.getLogger(ZipCSVFileReader.class);
 }

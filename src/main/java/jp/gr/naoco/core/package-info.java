@@ -33,4 +33,3 @@
  * @author naoco0917
  */
 package jp.gr.naoco.core;
-

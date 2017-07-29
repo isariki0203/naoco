@@ -24,5 +24,5 @@ import jp.gr.naoco.core.transaction.TransactionBarrierFactory;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Interceptee {
-	public String[] name() default "__default__";
+    public String[] name() default "__default__";
 }
