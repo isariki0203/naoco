@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project name="naoco" default="jar" basedir=".">
-	<property name="jar.name" value="naoco.jar"></property>
-	<property name="build.dest" value="target/classes"></property>
-
-	<target name="jar">
-		<jar destfile="${jar.name}" basedir="${build.dest}" excludes="build.xml,test/**,common.properties"></jar>
-	</target>
-</project>
